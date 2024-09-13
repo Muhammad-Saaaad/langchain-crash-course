@@ -1,13 +1,13 @@
 from dotenv import load_dotenv
 from langchain.prompts import ChatPromptTemplate
 from langchain.schema.runnable import RunnableLambda, RunnableSequence
-from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 
 # Load environment variables from .env
 load_dotenv()
 
 # Create a ChatOpenAI model
-model = ChatOpenAI(model="gpt-4")
+model = ChatGoogleGenerativeAI(model="gemini-1.5-flash" , api_key='AIzaSyA77gUQw_Fzk2L4hJx_6fzQOSZipJn_ZTg')
 
 # Define prompt templates
 prompt_template = ChatPromptTemplate.from_messages(
@@ -30,3 +30,5 @@ response = chain.invoke({"topic": "lawyers", "joke_count": 3})
 
 # Output
 print(response)
+
+# whenever you need to add sometime more to the chain you use Runnablelambda

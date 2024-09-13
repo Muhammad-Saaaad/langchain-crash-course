@@ -4,10 +4,18 @@ from langchain.text_splitter import CharacterTextSplitter
 from langchain_community.document_loaders import TextLoader
 from langchain_community.vectorstores import Chroma
 from langchain_openai import OpenAIEmbeddings
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
+from dotenv import load_dotenv
+
+load_dotenv()
+
+os.getenv("GOOGLE_API_KEY")
 
 # Define the directory containing the text file and the persistent directory
 current_dir = os.path.dirname(os.path.abspath(__file__))
-file_path = os.path.join(current_dir, "books", "odyssey.txt")
+
+file_path = os.path.join(current_dir, "books", r"odyssey.txt")
+
 persistent_directory = os.path.join(current_dir, "db", "chroma_db")
 
 # Check if the Chroma vector store already exists
@@ -16,16 +24,14 @@ if not os.path.exists(persistent_directory):
 
     # Ensure the text file exists
     if not os.path.exists(file_path):
-        raise FileNotFoundError(
-            f"The file {file_path} does not exist. Please check the path."
-        )
+        raise FileNotFoundError(f"The file {file_path} does not exist. Please check the path.")
 
     # Read the text content from the file
-    loader = TextLoader(file_path)
+    loader = TextLoader(file_path, encoding='utf-8')
     documents = loader.load()
 
     # Split the document into chunks
-    text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
+    text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
     docs = text_splitter.split_documents(documents)
 
     # Display information about the split documents
@@ -35,16 +41,17 @@ if not os.path.exists(persistent_directory):
 
     # Create embeddings
     print("\n--- Creating embeddings ---")
-    embeddings = OpenAIEmbeddings(
-        model="text-embedding-3-small"
+    embeddings = GoogleGenerativeAIEmbeddings(
+        model="models/text-embedding-004" , google_api_key='AIzaSyA77gUQw_Fzk2L4hJx_6fzQOSZipJn_ZTg'
     )  # Update to a valid embedding model if needed
     print("\n--- Finished creating embeddings ---")
 
     # Create the vector store and persist it automatically
     print("\n--- Creating vector store ---")
     db = Chroma.from_documents(
-        docs, embeddings, persist_directory=persistent_directory)
+        docs, embeddings, persist_directory=persistent_directory)  # here your locally vector store is being defined
     print("\n--- Finished creating vector store ---")
 
 else:
     print("Vector store already exists. No need to initialize.")
+

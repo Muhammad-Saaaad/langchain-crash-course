@@ -1,18 +1,18 @@
 from dotenv import load_dotenv
-from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.schema import AIMessage, HumanMessage, SystemMessage
 
 # Load environment variables from .env
-load_dotenv()
+# load_dotenv()
 
 # Create a ChatOpenAI model
-model = ChatOpenAI(model="gpt-4o")
+model = ChatGoogleGenerativeAI(model="gemini-1.5-flash" , api_key='AIzaSyA77gUQw_Fzk2L4hJx_6fzQOSZipJn_ZTg')
 
 
 chat_history = []  # Use a list to store messages
 
 # Set an initial system message (optional)
-system_message = SystemMessage(content="You are a helpful AI assistant.")
+system_message = SystemMessage(content="You are a software enginner ")
 chat_history.append(system_message)  # Add system message to chat history
 
 # Chat loop

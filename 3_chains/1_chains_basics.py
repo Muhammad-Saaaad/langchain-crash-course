@@ -1,13 +1,13 @@
 from dotenv import load_dotenv
 from langchain.prompts import ChatPromptTemplate
 from langchain.schema.output_parser import StrOutputParser
-from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 
 # Load environment variables from .env
 load_dotenv()
 
 # Create a ChatOpenAI model
-model = ChatOpenAI(model="gpt-4o")
+model = ChatGoogleGenerativeAI(model="gemini-1.5-flash" , api_key='AIzaSyA77gUQw_Fzk2L4hJx_6fzQOSZipJn_ZTg')
 
 # Define prompt templates (no need for separate Runnable chains)
 prompt_template = ChatPromptTemplate.from_messages(
@@ -18,11 +18,11 @@ prompt_template = ChatPromptTemplate.from_messages(
 )
 
 # Create the combined chain using LangChain Expression Language (LCEL)
-chain = prompt_template | model | StrOutputParser()
+chain = prompt_template | model | StrOutputParser() # when we do result.content to just get the content StrOutParser does the same
 # chain = prompt_template | model
 
 # Run the chain
 result = chain.invoke({"topic": "lawyers", "joke_count": 3})
 
 # Output
-print(result)
+print(result) 

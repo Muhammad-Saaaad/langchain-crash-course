@@ -1,0 +1,18 @@
+The difference between prompt.invoke() and prompt.format_prompt() is significant and relates to what stage of processing you're at 
+with your prompt. Let's break down each method:
+
+prompt.format_prompt():
+
+format_prompt() creates a PromptValue object. This object contains the formatted prompt, but it hasn't been sent to any language model yet. 
+It's useful when you want to inspect the prompt before sending it to a model, or if you need to use the prompt in a different context.
+
+prompt.invoke():
+
+invoke() actually runs the prompt through the language model and returns the model's response. It's used when you want to get the final 
+output from the AI.
+
+The main differences are:
+
+Stage of processing: format_prompt() is preparatory, while invoke() executes the prompt.
+Output: format_prompt() returns a PromptValue object, while invoke() returns the model's response.
+Model involvement: format_prompt() doesn't involve the language model, while invoke() does.

@@ -2,13 +2,13 @@ from dotenv import load_dotenv
 from langchain.prompts import ChatPromptTemplate
 from langchain.schema.output_parser import StrOutputParser
 from langchain.schema.runnable import RunnableParallel, RunnableLambda
-from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 
 # Load environment variables from .env
 load_dotenv()
 
 # Create a ChatOpenAI model
-model = ChatOpenAI(model="gpt-4o")
+model = ChatGoogleGenerativeAI(model="gemini-1.5-flash" , api_key='AIzaSyA77gUQw_Fzk2L4hJx_6fzQOSZipJn_ZTg')
 
 # Define prompt template
 prompt_template = ChatPromptTemplate.from_messages(
@@ -30,7 +30,7 @@ def analyze_pros(features):
             ),
         ]
     )
-    return pros_template.format_prompt(features=features)
+    return pros_template.format_prompt(features=features) # format_prompt as we see in part 2 
 
 
 # Define cons analysis step
@@ -53,7 +53,7 @@ def combine_pros_cons(pros, cons):
 
 
 # Simplify branches with LCEL
-pros_branch_chain = (
+pros_branch_chain = ( # here the x is the feature list that we have got after processing the prompt_tempalate
     RunnableLambda(lambda x: analyze_pros(x)) | model | StrOutputParser()
 )
 

@@ -2,13 +2,13 @@ from dotenv import load_dotenv
 from langchain.prompts import ChatPromptTemplate
 from langchain.schema.output_parser import StrOutputParser
 from langchain.schema.runnable import RunnableBranch
-from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 
 # Load environment variables from .env
 load_dotenv()
 
 # Create a ChatOpenAI model
-model = ChatOpenAI(model="gpt-4o")
+model = ChatGoogleGenerativeAI(model="gemini-1.5-flash" , api_key='AIzaSyA77gUQw_Fzk2L4hJx_6fzQOSZipJn_ZTg')
 
 # Define prompt templates for different feedback types
 positive_feedback_template = ChatPromptTemplate.from_messages(
@@ -85,7 +85,7 @@ chain = classification_chain | branches
 # Neutral review - "The product is okay. It works as expected but nothing exceptional."
 # Default - "I'm not sure about the product yet. Can you tell me more about its features and benefits?"
 
-review = "The product is terrible. It broke after just one use and the quality is very poor."
+review = "The product is excellent. I really enjoyed using it and found it very helpful."
 result = chain.invoke({"feedback": review})
 
 # Output the result
