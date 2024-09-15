@@ -1,4 +1,7 @@
+from dotenv import load_dotenv
 import os
+
+load_dotenv()
 
 from langchain.text_splitter import (
     CharacterTextSplitter,
@@ -9,7 +12,8 @@ from langchain.text_splitter import (
 )
 from langchain_community.document_loaders import TextLoader
 from langchain_community.vectorstores import Chroma
-from langchain_openai import OpenAIEmbeddings
+# from langchain_openai import OpenAIEmbeddings
+from langchain_google_genai import ChatGoogleGenerativeAI
 
 # Define the directory containing the text file
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -23,12 +27,18 @@ if not os.path.exists(file_path):
     )
 
 # Read the text content from the file
-loader = TextLoader(file_path)
+loader = TextLoader(file_path , encoding='utf-8')
 documents = loader.load()
 
 # Define the embedding model
-embeddings = OpenAIEmbeddings(
-    model="text-embedding-3-small"
+# embeddings = OpenAIEmbeddings(
+#     model="text-embedding-3-small"
+
+key = os.getenv("GOOGLE_API_KEY")
+
+embeddings = ChatGoogleGenerativeAI(
+                                    model="models/text-embedding-004", 
+                                    api_key= key,
 )  # Update to a valid embedding model if needed
 
 
@@ -48,7 +58,7 @@ def create_vector_store(docs, store_name):
 
 # 1. Character-based Splitting
 # Splits text into chunks based on a specified number of characters.
-# Useful for consistent chunk sizes regardless of content structure.
+# Useful for consistent chunk sizes regardless of content structure. ex: Books, or anything where you 
 print("\n--- Using Character-based Splitting ---")
 char_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
 char_docs = char_splitter.split_documents(documents)

@@ -36,8 +36,7 @@ if not os.path.exists(persistent_directory):
         loader = TextLoader(file_path , encoding='utf-8')
         book_docs = loader.load()
         for doc in book_docs:
-            # Add metadata to each document indicating its source
-            doc.metadata = {"source": book_file}
+            doc.metadata = {"source": book_file} ## Adding metadata to every doc to avoid hillosunation
             documents.append(doc)
 
     # Split the documents into chunks

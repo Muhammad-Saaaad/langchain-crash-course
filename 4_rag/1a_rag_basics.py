@@ -3,13 +3,13 @@ import os
 from langchain.text_splitter import CharacterTextSplitter
 from langchain_community.document_loaders import TextLoader
 from langchain_community.vectorstores import Chroma
-from langchain_openai import OpenAIEmbeddings
+# from langchain_openai import OpenAIEmbeddings
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
-from dotenv import load_dotenv
+from dotenv import load
 
-load_dotenv()
+load()
 
-os.getenv("GOOGLE_API_KEY")
+print(os.getenv("GOOGLE_API_KEY"))
 
 # Define the directory containing the text file and the persistent directory
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -42,7 +42,7 @@ if not os.path.exists(persistent_directory):
     # Create embeddings
     print("\n--- Creating embeddings ---")
     embeddings = GoogleGenerativeAIEmbeddings(
-        model="models/text-embedding-004" , google_api_key='AIzaSyA77gUQw_Fzk2L4hJx_6fzQOSZipJn_ZTg'
+        model="models/text-embedding-004" , google_api_key=os.getenv("GOOGLE_API_KEY")
     )  # Update to a valid embedding model if needed
     print("\n--- Finished creating embeddings ---")
 
