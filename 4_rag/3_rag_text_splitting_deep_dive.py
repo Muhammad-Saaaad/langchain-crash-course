@@ -11,9 +11,9 @@ from langchain.text_splitter import (
     TokenTextSplitter,
 )
 from langchain_community.document_loaders import TextLoader
-from langchain_community.vectorstores import Chroma
+from langchain.vectorstores import Chroma
 # from langchain_openai import OpenAIEmbeddings
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
 
 # Define the directory containing the text file
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -34,12 +34,10 @@ documents = loader.load()
 # embeddings = OpenAIEmbeddings(
 #     model="text-embedding-3-small"
 
-key = os.getenv("GOOGLE_API_KEY")
+# key = os.getenv("GOOGLE_API_KEY")
 
-embeddings = ChatGoogleGenerativeAI(
-                                    model="models/text-embedding-004", 
-                                    api_key= key,
-)  # Update to a valid embedding model if needed
+embeddings = GoogleGenerativeAIEmbeddings(
+                                    model="models/text-embedding-004")  # Update to a valid embedding model if needed
 
 
 # Function to create and persist vector store
@@ -48,7 +46,7 @@ def create_vector_store(docs, store_name):
     if not os.path.exists(persistent_directory):
         print(f"\n--- Creating vector store {store_name} ---")
         db = Chroma.from_documents(
-            docs, embeddings, persist_directory=persistent_directory
+            docs, embedding=embeddings, persist_directory=persistent_directory
         )
         print(f"--- Finished creating vector store {store_name} ---")
     else:
@@ -138,3 +136,10 @@ query_vector_store("chroma_db_sent", query)
 query_vector_store("chroma_db_token", query)
 query_vector_store("chroma_db_rec_char", query)
 query_vector_store("chroma_db_custom", query)
+
+# # test_import.py
+# try:
+#     from langchain.vectorstores import Chroma
+#     print("ChromaDB imported successfully.")
+# except ImportError as e:
+#     print("Error importing ChromaDB:", e)
