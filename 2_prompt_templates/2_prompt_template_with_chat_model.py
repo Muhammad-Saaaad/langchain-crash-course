@@ -6,7 +6,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 load_dotenv()
 
 # Create a ChatOpenAI model
-model = ChatGoogleGenerativeAI(model="gemini-1.5-flash" , api_key='AIzaSyA77gUQw_Fzk2L4hJx_6fzQOSZipJn_ZTg')
+model = ChatGoogleGenerativeAI(model="gemini-1.5-flash")
 
 # PART 1: Create a ChatPromptTemplate using a template string
 print("-----Prompt from Template-----")

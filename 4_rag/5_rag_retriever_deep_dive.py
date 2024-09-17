@@ -2,7 +2,8 @@ import os
 
 from dotenv import load_dotenv
 from langchain_community.vectorstores import Chroma
-from langchain_openai import OpenAIEmbeddings
+# from langchain_openai import OpenAIEmbeddings
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
 
 load_dotenv()
 
@@ -12,7 +13,7 @@ db_dir = os.path.join(current_dir, "db")
 persistent_directory = os.path.join(db_dir, "chroma_db_with_metadata")
 
 # Define the embedding model
-embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
+embeddings = GoogleGenerativeAIEmbeddings(model="models/text-embedding-004")
 
 # Load the existing vector store with the embedding function
 db = Chroma(persist_directory=persistent_directory,
@@ -20,9 +21,9 @@ db = Chroma(persist_directory=persistent_directory,
 
 
 # Function to query a vector store with different search types and parameters
-def query_vector_store(
-    store_name, query, embedding_function, search_type, search_kwargs
-):
+def query_vector_store(store_name, query, embedding_function, 
+                        search_type, search_kwargs,):
+    
     if os.path.exists(persistent_directory):
         print(f"\n--- Querying the Vector Store {store_name} ---")
         db = Chroma(
@@ -53,14 +54,15 @@ query = "How did Juliet die?"
 # This method retrieves documents based on vector similarity.
 # It finds the most similar documents to the query vector based on cosine similarity.
 # Use this when you want to retrieve the top k most similar documents.
+# here if you now for sure that every question you will be asking will be revent to that database then you really don't need to add threashold
 print("\n--- Using Similarity Search ---")
 query_vector_store("chroma_db_with_metadata", query,
-                   embeddings, "similarity", {"k": 3})
+                   embeddings, "similarity", {"k": 3}) # so this is i wanted to get the top 3 similiar score
 
 # 2. Max Marginal Relevance (MMR)
 # This method balances between selecting documents that are relevant to the query and diverse among themselves.
 # 'fetch_k' specifies the number of documents to initially fetch based on similarity.
-# 'lambda_mult' controls the diversity of the results: 1 for minimum diversity, 0 for maximum.
+# 'lambda_mult' controls the diversity of the results: 1 for minimum diversity (result docs mostly similar), 0 for maximum(result docs not similar).
 # Use this when you want to avoid redundancy and retrieve diverse yet relevant documents.
 # Note: Relevance measures how closely documents match the query.
 # Note: Diversity ensures that the retrieved documents are not too similar to each other,
