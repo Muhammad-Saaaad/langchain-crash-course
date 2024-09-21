@@ -69,7 +69,7 @@ qa_system_prompt = (
     "don't know. Use three sentences maximum and keep the answer "
     "concise."
     "\n\n"
-    "{context}" # what is this context.
+    "{context}" # placeholder for the retrieved context or relevant information from the vector store that will be passed to the prompt
 )
 
 # Create a prompt template for answering questions

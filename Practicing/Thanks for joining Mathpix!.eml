@@ -1,0 +1,120 @@
+Delivered-To: rsaad0067@gmail.com
+Received: by 2002:a2e:9097:0:b0:2f0:2085:6ca0 with SMTP id l23csp406951ljg;
+        Thu, 19 Sep 2024 16:33:27 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IH0/9GTlucvVisqGJkHIUZLxgsOKRDxx6lfsQzFZQnM5DcjatjL44XF1dWCAW8PIzz66oSQ
+X-Received: by 2002:a05:622a:11d4:b0:453:7634:bbfa with SMTP id d75a77b69052e-45b204eff75mr19055521cf.21.1726788806797;
+        Thu, 19 Sep 2024 16:33:26 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1726788806; cv=none;
+        d=google.com; s=arc-20240605;
+        b=i+oz6gc7je6KvW3+QOHrOaqbVo4Lx/BdYvPBwYU5aeBDyMDqQ2qp2K6GiOeZhohwT+
+         BS/SUBfcjv1AD6tvLOBdd7WIouJTYNL3YrLGLT0J3oGksXOYJ43KKezdiSBFrltYypBK
+         3ATnBlKuextN76Der37gRr2F1uz3hNsqOtW3JBy7hnoKR6SQpPUeq4y415hG0Ra4TH0u
+         9bl/RU7USCXrmPAQCz38NJ6Gv6UD1TpWZt8wo44EwyGWM/DyhECNQdJYbP2JP/TMwqxL
+         vTbPEunLBwmVry8g62Hy7UTYOD1F/ZsAwO5PTsQ+g3MzyVP4EI1An1Cfnvf4Kl9i3uK2
+         qxkQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=feedback-id:date:message-id:mime-version:subject:to:from
+         :dkim-signature:dkim-signature;
+        bh=cjmwyoSwqhZyWXEkr59yJxTYpOSSsOl+SoiuZkq5k9s=;
+        fh=QWRTLpuClX+W0exMiIZq+FU7dppQxWpmdxjaIqGzKNU=;
+        b=VEcSPV9ejbgvLIOA9TEVpS+TyOyc6S7qLu76XrjnxioAERIDUNsAuSVv/1anJcFBFd
+         CMh57MmRpfUZ/I7XUILn6cH1ADWEZIdRsPX6GLGo44NTZzgcumg3j9Dvgvhs4R7yEbt3
+         K8owMI4L9FPDUSpBrpB7PXvEUrN0Pq6gXRG86DizxC6CSczpfYonlOjotHwb1bXYKpds
+         KNAsAnnR46avX2778Cu4Fn22dcKEpDrG2aKlkkeXh4HxDxFDJqULslH6gG2U3YIU891D
+         dVH7X4fWzPsA6ULmxkNcXD7kONgUcRGrgQ8hRlmxRfNnlGzb8Lr7pd+9Y2TDhIjlzz2Y
+         TcQw==;
+        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@mathpix.com header.s=ifodg2bihvdpw4m4l64y4c5h2dmwp5io header.b=j6Dn1orb;
+       dkim=pass header.i=@amazonses.com header.s=ug7nbtf4gccmlpwj322ax3p6ow6yfsug header.b=G75IKojh;
+       spf=pass (google.com: domain of 010001920ca22694-a41cc2c7-8755-4fef-8868-465ebc19efaf-000000@amazonses.com designates 54.240.8.83 as permitted sender) smtp.mailfrom=010001920ca22694-a41cc2c7-8755-4fef-8868-465ebc19efaf-000000@amazonses.com;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=mathpix.com
+Return-Path: <010001920ca22694-a41cc2c7-8755-4fef-8868-465ebc19efaf-000000@amazonses.com>
+Received: from a8-83.smtp-out.amazonses.com (a8-83.smtp-out.amazonses.com. [54.240.8.83])
+        by mx.google.com with ESMTPS id d75a77b69052e-45b1786bf83si29013521cf.1.2024.09.19.16.33.26
+        for <rsaad0067@gmail.com>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 19 Sep 2024 16:33:26 -0700 (PDT)
+Received-SPF: pass (google.com: domain of 010001920ca22694-a41cc2c7-8755-4fef-8868-465ebc19efaf-000000@amazonses.com designates 54.240.8.83 as permitted sender) client-ip=54.240.8.83;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@mathpix.com header.s=ifodg2bihvdpw4m4l64y4c5h2dmwp5io header.b=j6Dn1orb;
+       dkim=pass header.i=@amazonses.com header.s=ug7nbtf4gccmlpwj322ax3p6ow6yfsug header.b=G75IKojh;
+       spf=pass (google.com: domain of 010001920ca22694-a41cc2c7-8755-4fef-8868-465ebc19efaf-000000@amazonses.com designates 54.240.8.83 as permitted sender) smtp.mailfrom=010001920ca22694-a41cc2c7-8755-4fef-8868-465ebc19efaf-000000@amazonses.com;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=mathpix.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+	s=ifodg2bihvdpw4m4l64y4c5h2dmwp5io; d=mathpix.com; t=1726788806;
+	h=From:To:Subject:MIME-Version:Content-Type:Message-ID:Date;
+	bh=cjmwyoSwqhZyWXEkr59yJxTYpOSSsOl+SoiuZkq5k9s=;
+	b=j6Dn1orblFo3iCh8YdlKFTD3y2rX1xMDmekmsF3amDI33zfrx48LUGa+Ktsn3fDP
+	9I/qkobmoYaUJKtQN4/X98WoksJqVHbJULPxQu8vT5EIzvT98h4+/HJPgAiBCstKkmz
+	d7zXzb/hQ+992FVfeME7CpXCeM65NahXNfXpoRfA=
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+	s=ug7nbtf4gccmlpwj322ax3p6ow6yfsug; d=amazonses.com; t=1726788806;
+	h=From:To:Subject:MIME-Version:Content-Type:Message-ID:Date:Feedback-ID;
+	bh=cjmwyoSwqhZyWXEkr59yJxTYpOSSsOl+SoiuZkq5k9s=;
+	b=G75IKojhWbfwzFYonEhc77SJ2en79x6jBnIekTRGy7hEU57DZcDeIpsQWk7Lk9d+
+	A6GBTYfhTQMys0fBLVvTvl+xwbFPm1mftgyi+UjM+aTyLOQkwUXKNSBD0KqVfyBCXN7
+	1SlF7O7rb/rpSQH1x1R/2oryg1YVjnaARPpxT5uM=
+From: Mathpix Support <support@mathpix.com>
+To: rsaad0067@gmail.com
+Subject: Thanks for joining Mathpix!
+MIME-Version: 1.0
+Content-Type: multipart/alternative; 
+	boundary="----=_Part_554393_1255878542.1726788806292"
+Message-ID: <010001920ca22694-a41cc2c7-8755-4fef-8868-465ebc19efaf-000000@email.amazonses.com>
+Date: Thu, 19 Sep 2024 23:33:26 +0000
+Feedback-ID: ::1.us-east-1.s2kC/VB2LsKE7cQmRLV+8y1FkFWYamXhI1cHF7yXqWc=:AmazonSES
+X-SES-Outgoing: 2024.09.19-54.240.8.83
+
+------=_Part_554393_1255878542.1726788806292
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+Hi,
+
+Welcome to Mathpix!
+
+Now that you have verified your email address, you can start using the Snip=
+ apps to easily digitize math and science on your mobile and desktop device=
+s. You are also welcome to use our Snip web app - a full-featured Markdown =
+editor with PDF conversion support. For more information read Mathpix Snip =
+app docs.
+
+What=E2=80=99s more, we offer an OCR API for integrating our image and PDF =
+processing technology into your apps! For more information, please visit ou=
+r website and read Mathpix OCR developer docs.
+
+Ever have feedback for us? Send us an email at support@mathpix.com or tweet=
+ at us!
+
+Sincerely,
+The Mathpix Team
+
+------=_Part_554393_1255878542.1726788806292
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<p>Hi,</p>
+
+<p>Welcome to Mathpix!</p>
+
+<p>Now that you have verified your email address, you can start using the S=
+nip apps to easily digitize math and science on your <a href=3D"https://mat=
+hpix.com/mobile-downloads">mobile</a> and <a href=3D"https://mathpix.com/de=
+sktop-downloads">desktop</a> devices. You are also welcome to use our <a hr=
+ef=3D"https://snip.mathpix.com">Snip web app</a> - a full-featured Markdown=
+ editor with PDF conversion support. For more information read <a href=3D"h=
+ttps://mathpix.com/docs/snip/overview">Mathpix Snip app docs</a>.
+
+<p>What=E2=80=99s more, we offer an OCR API for integrating our image and P=
+DF processing technology into your apps! For more information, please visit=
+ <a href=3D"https://mathpix.com/ocr">our website</a> and read <a href=3D"ht=
+tps://docs.mathpix.com">Mathpix OCR developer docs</a>.</p>
+
+<p>Ever have feedback for us? Send us an email at support@mathpix.com or <a=
+ href=3D"https://twitter.com/MathpixApp">tweet at us</a>!</p>
+
+<p>Sincerely,<br/> The Mathpix Team</p>
+
+
+------=_Part_554393_1255878542.1726788806292--

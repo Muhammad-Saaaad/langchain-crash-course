@@ -81,6 +81,8 @@ create_vector_store(token_docs, "chroma_db_token")
 # 4. Recursive Character-based Splitting
 # Attempts to split text at natural boundaries (sentences, paragraphs) within character limit.
 # Balances between maintaining coherence and adhering to character limits.
+# sperator parameter is used as it will make a chunk of it base on the seprator parameter become True at the end of the chunk_size
+# if not then it will kept on going untile it meet the requirments where it get the seprator parameter True 
 print("\n--- Using Recursive Character-based Splitting ---")
 rec_char_splitter = RecursiveCharacterTextSplitter(
     chunk_size=1000, chunk_overlap=100)
