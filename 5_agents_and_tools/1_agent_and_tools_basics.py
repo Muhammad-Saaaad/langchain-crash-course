@@ -5,14 +5,15 @@ from langchain.agents import (
     create_react_agent,
 )
 from langchain_core.tools import Tool
-from langchain_openai import ChatOpenAI
+# from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 
 # Load environment variables from .env file
 load_dotenv()
 
 
 # Define a very simple tool function that returns the current time
-def get_current_time(*args, **kwargs):
+def get_current_time(*args, **kwargs): # sometimes agents passes some different parameters so that why we are doing this
     """Returns the current time in H:MM AM/PM format."""
     import datetime  # Import datetime module to get current time
 
@@ -22,7 +23,7 @@ def get_current_time(*args, **kwargs):
 
 # List of tools available to the agent
 tools = [
-    Tool(
+    Tool( # we use name and description so our agents can easily understand what this tool is about
         name="Time",  # Name of the tool
         func=get_current_time,  # Function that the tool will execute
         # Description of the tool
@@ -36,8 +37,12 @@ tools = [
 prompt = hub.pull("hwchase17/react")
 
 # Initialize a ChatOpenAI model
-llm = ChatOpenAI(
-    model="gpt-4o", temperature=0
+# llm = ChatOpenAI(
+#     model="gpt-4o", temperature=0
+# )
+
+llm = ChatGoogleGenerativeAI(
+    model='gemini-1.5-flash', temperature=0
 )
 
 # Create the ReAct agent using the create_react_agent function
@@ -56,7 +61,7 @@ agent_executor = AgentExecutor.from_agent_and_tools(
 )
 
 # Run the agent with a test query
-response = agent_executor.invoke({"input": "What time is it?"})
+response = agent_executor.invoke({"input": "What time is it? and is it day or night or morning or evening."})
 
 # Print the response from the agent
 print("response:", response)
