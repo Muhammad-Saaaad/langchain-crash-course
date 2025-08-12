@@ -5,9 +5,9 @@ from langchain_community.document_loaders import TextLoader
 from langchain_community.vectorstores import Chroma
 # from langchain_openai import OpenAIEmbeddings
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
-from dotenv import load
+from dotenv import load_dotenv
 
-load()
+load_dotenv()
 
 print(os.getenv("GOOGLE_API_KEY"))
 

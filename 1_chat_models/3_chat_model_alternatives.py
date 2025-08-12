@@ -1,3 +1,5 @@
+import os
+
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_anthropic import ChatAnthropic
 from langchain_openai import ChatOpenAI
@@ -37,7 +39,8 @@ messages = [
 
 # https://console.cloud.google.com/gen-app-builder/engines
 # https://ai.google.dev/gemini-api/docs/models/gemini
-model = ChatGoogleGenerativeAI(model="gemini-1.5-flash" , api_key='AIzaSyA77gUQw_Fzk2L4hJx_6fzQOSZipJn_ZTg')
+key = os.getenv("GOOGLE_API_KEY")
+model = ChatGoogleGenerativeAI(model="gemini-1.5-flash" , api_key=key)
 
 result = model.invoke(messages)
 print(f"Answer from Google: {result.content}")

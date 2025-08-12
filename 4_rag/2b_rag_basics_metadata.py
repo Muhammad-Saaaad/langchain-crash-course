@@ -11,7 +11,7 @@ persistent_directory = os.path.join(db_dir, "chroma_db_with_metadata")
 # Define the embedding model
 # embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
 embeddings = GoogleGenerativeAIEmbeddings(
-            model="models/text-embedding-004" , google_api_key='AIzaSyA77gUQw_Fzk2L4hJx_6fzQOSZipJn_ZTg'
+            model="models/text-embedding-004" , google_api_key=os.getenv("GOOGLE_API_KEY")
         )
 
 # Load the existing vector store with the embedding function
