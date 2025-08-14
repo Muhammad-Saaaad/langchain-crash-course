@@ -1,12 +1,15 @@
+import os
+
 from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain.schema import AIMessage, HumanMessage, SystemMessage
+# from langchain.schema import AIMessage, HumanMessage, SystemMessage # unstable and deprecated
+from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 
 # Load environment variables from .env
 # load_dotenv()
 
 # Create a ChatOpenAI model
-model = ChatGoogleGenerativeAI(model="gemini-1.5-flash" , api_key='AIzaSyA77gUQw_Fzk2L4hJx_6fzQOSZipJn_ZTg')
+model = ChatGoogleGenerativeAI(model="gemini-1.5-flash" , api_key=os.getenv("GOOGLE_API_KEY"))
 
 
 chat_history = []  # Use a list to store messages

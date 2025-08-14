@@ -66,7 +66,7 @@ chain = (
     prompt_template
     | model
     | StrOutputParser()
-    | RunnableParallel(branches={"pros": pros_branch_chain, "cons": cons_branch_chain})
+    | RunnableParallel(branches={"pros": pros_branch_chain, "cons": cons_branch_chain}) # imagine the output is x
     | RunnableLambda(lambda x: combine_pros_cons(x["branches"]["pros"], x["branches"]["cons"]))
 )
 

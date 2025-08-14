@@ -25,7 +25,9 @@ add_comma = RunnableLambda(lambda x : (', ').join(x.split()))
 # you can do anything you want withthe Runnablelambda function
 
 # Create the combined chain using LangChain Expression Language (LCEL)
-chain = prompt_template | model | StrOutputParser() | uppercase_output | count_words | add_comma
+chain = prompt_template | model | StrOutputParser() | uppercase_output | count_words | add_comma # for simper usage
+
+# You use RunnableSequence() that we have studies in leacture 2, when chain gets complex
 
 # Run the chain
 result = chain.invoke({"topic": "lawyers", "joke_count": 3})

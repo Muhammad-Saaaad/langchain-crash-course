@@ -5,6 +5,8 @@ from langchain.prompts import ChatPromptTemplate
 from langchain_core.messages import HumanMessage
 
 # PART 1: Create a ChatPromptTemplate using a template string
+# use .from_template() when you want to give a single String as a template
+# use .from_messages() when you want to give a list of messages like below
 template = "Tell me a joke about {topic}."
 prompt_template = ChatPromptTemplate.from_template(template) # make our template from a string into a template
 

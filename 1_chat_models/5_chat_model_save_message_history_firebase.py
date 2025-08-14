@@ -1,7 +1,9 @@
 # Example Source: https://python.langchain.com/v0.2/docs/integrations/memory/google_firestore/
 
+import os
+
 from dotenv import load_dotenv
-from google.cloud import firestore
+from google.cloud import firestore # using firebase to store messages
 from langchain_google_firestore import FirestoreChatMessageHistory
 from langchain_google_genai import ChatGoogleGenerativeAI
 
@@ -42,7 +44,7 @@ print("Chat History Initialized.")
 print("Current Chat History:", chat_history.messages)
 
 # Initialize Chat Model
-model = ChatGoogleGenerativeAI(model="gemini-1.5-flash" , api_key='AIzaSyA77gUQw_Fzk2L4hJx_6fzQOSZipJn_ZTg')
+model = ChatGoogleGenerativeAI(model="gemini-1.5-flash" , api_key=os.getenv('GOOGLE_API_KEY'))
 
 print("Start chatting with the AI. Type 'exit' to quit.")
 
@@ -53,7 +55,7 @@ while True:
 
     chat_history.add_user_message(human_input)
 
-    ai_response = model.invoke(chat_history.messages)
+    ai_response = model.invoke(chat_history.messages) # here you are giving all of your previous message
     chat_history.add_ai_message(ai_response.content)
 
     print(f"AI: {ai_response.content}")

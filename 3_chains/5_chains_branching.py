@@ -2,13 +2,17 @@ from dotenv import load_dotenv
 from langchain.prompts import ChatPromptTemplate
 from langchain.schema.output_parser import StrOutputParser
 from langchain.schema.runnable import RunnableBranch
-from langchain_google_genai import ChatGoogleGenerativeAI
+# from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_deepseek import ChatDeepSeek
 
 # Load environment variables from .env
 load_dotenv()
 
+# models = ["deepseek-chat", "deepseek-coder", "deepseek-reasoner"] deep seek models from low to high
+
 # Create a ChatOpenAI model
-model = ChatGoogleGenerativeAI(model="gemini-1.5-flash" , api_key='AIzaSyA77gUQw_Fzk2L4hJx_6fzQOSZipJn_ZTg')
+# model = ChatGoogleGenerativeAI(model="gemini-1.5-flash" , api_key='AIzaSyA77gUQw_Fzk2L4hJx_6fzQOSZipJn_ZTg')
+model = ChatDeepSeek(model='deepseek-chat')
 
 # Define prompt templates for different feedback types
 positive_feedback_template = ChatPromptTemplate.from_messages(
@@ -57,7 +61,7 @@ classification_template = ChatPromptTemplate.from_messages(
 )
 
 # Define the runnable branches for handling feedback
-branches = RunnableBranch(
+branches = RunnableBranch( # In RunnableBranch you have a if statement if that is true then you run that branch else you don't run.
     (
         lambda x: "positive" in x,
         positive_feedback_template | model | StrOutputParser()  # Positive feedback chain
