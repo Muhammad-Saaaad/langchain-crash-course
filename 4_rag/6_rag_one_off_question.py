@@ -4,7 +4,8 @@ from dotenv import load_dotenv
 from langchain_community.vectorstores import Chroma
 from langchain_core.messages import HumanMessage, SystemMessage
 # from langchain_openai import ChatOpenAI, OpenAIEmbeddings
-from langchain_google_genai import GoogleGenerativeAIEmbeddings , ChatGoogleGenerativeAI
+# from langchain_google_genai import GoogleGenerativeAIEmbeddings , ChatGoogleGenerativeAI
+from langchain_deepseek import ChatDeepSeek
 
 # Load environment variables from .env
 load_dotenv()

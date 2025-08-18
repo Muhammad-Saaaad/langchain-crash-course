@@ -86,6 +86,10 @@ qa_prompt = ChatPromptTemplate.from_messages(
 question_answer_chain = create_stuff_documents_chain(llm, qa_prompt)
 
 # Create a retrieval chain that combines the history-aware retriever and the question answering chain
+# 1. History_aware_retriever get the question and previous chat history, if it realted with previous question it will transfrom the question
+#### accoring to the chat history
+# 2. staff_documents_chain get the data from vector db, stuff all the chunks together and get the question from history_aware_retriever
+### then pass the question and the chunks to llm and get the answer.
 rag_chain = create_retrieval_chain(history_aware_retriever, question_answer_chain)
 
 

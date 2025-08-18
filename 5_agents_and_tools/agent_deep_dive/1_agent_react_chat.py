@@ -4,7 +4,8 @@ from langchain.agents import AgentExecutor, create_structured_chat_agent
 from langchain.memory import ConversationBufferMemory
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 from langchain_core.tools import Tool
-from langchain_openai import ChatOpenAI
+# from langchain_openai import ChatOpenAI
+from langchain_deepseek import ChatDeepSeek
 
 # Load environment variables from .env file
 load_dotenv()
@@ -29,9 +30,17 @@ def search_wikipedia(query):
     except:
         return "I couldn't find any information on that."
 
+def capatalize_text(text):
+    return text.upper()
 
 # Define the tools that the agent can use
 tools = [
+    
+    Tool(
+        name='Capitalize',
+        func=capatalize_text,
+        description="This is use to capitalize the text."
+    ),
     Tool(
         name="Time",
         func=get_current_time,
@@ -48,7 +57,7 @@ tools = [
 prompt = hub.pull("hwchase17/structured-chat-agent")
 
 # Initialize a ChatOpenAI model
-llm = ChatOpenAI(model="gpt-4o")
+llm = ChatDeepSeek(model='deepseek-chat')
 
 # Create a structured Chat Agent with Conversation Buffer Memory
 # ConversationBufferMemory stores the conversation history, allowing the agent to maintain context across interactions
